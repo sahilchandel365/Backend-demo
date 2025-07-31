@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app)
 CORS(app)
 
-@app.route("/update-section", methods=["POST"])
+@app.route("/api/update-section", methods=["POST"])
 def log_edit():
     try:
         data = request.get_json()
@@ -23,6 +25,3 @@ def log_edit():
     except Exception as e:
         print("Error logging edit:", str(e))
         return jsonify({"error": str(e)}), 500
-
-# This exposes the app to Vercel
-handler = app

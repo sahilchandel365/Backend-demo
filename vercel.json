@@ -2,15 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/update.py",
+      "src": "api/update-section.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/update-section",
-      "methods": ["POST", "OPTIONS"],
-      "dest": "api/update.py"
+      "src": "/api/update-section",
+      "dest": "api/update-section.py"
     }
   ]
 }
