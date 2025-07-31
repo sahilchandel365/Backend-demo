@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)
 
 @app.route("/update-section", methods=["POST"])
 def log_edit():
@@ -22,5 +22,7 @@ def log_edit():
         print("Error logging edit:", str(e))
         return jsonify({"error": str(e)}), 500
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# This is required for Vercel to recognize the app
+# Do NOT include app.run()
+# Expose it as a callable
+handler = app
